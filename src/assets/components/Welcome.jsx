@@ -37,8 +37,15 @@ function Welcome() {
       ? "dia"
       : horaAtual >= 12 && horaAtual < 18
       ? "tarde"
-      : "noite";
-  const saudacao = mensagens[periodo][0];
+        : "noite";
+  
+const listaMensagens = mensagens[periodo];
+
+// gera um índice aleatório
+const indiceAleatorio = Math.floor(Math.random() * listaMensagens.length);
+
+// escolhe a saudação aleatória
+const saudacao = listaMensagens[indiceAleatorio];
 
   return (
     <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-0 md:ml-24 px-4 text-center md:text-left">

@@ -1,42 +1,57 @@
 import { useEffect, useState } from "react";
+
 function Weather() {
-    const [weather, setWeather] = useState(null);
-    const [erro, setErro] = useState(false);
-    
-  function getLocaltion() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-      alert("Not suported!");
-    }
-  }
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
+  const [weather, setWeather] = useState(null);
+  const [erro, setErro] = useState(false);
+  const [coords, setCoords] = useState(null);
+
 
   useEffect(() => {
-    async function weatherSearch(position) {
+    if (!navigator.geolocation) {
+      setErro(true);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCoords({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      () => setErro(true)
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!coords) return; 
+
+    async function weatherSearch() {
       try {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
         const response = await fetch(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=KEY`
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${API_KEY}&units=metric&lang=pt_br`
         );
-        if (!response.ok) throw new Error("Erro na rede");
 
         const data = await response.json();
-        // A API retorna um array [ {q: "...", a: "..."} ]
-        setWeather(data.weather.main);
+
+        setWeather(data.current.weather[0].main);
       } catch (error) {
-        console.error("Weather error:", error);
+        console.error(error);
         setErro(true);
       }
     }
+
     weatherSearch();
-  }, []);
-    
+  }, [coords]);
+
   return (
     <div>
       {!weather && !erro && (
         <p className="text-4xl font-extralight italic py-5">Loading...</p>
       )}
+
+      {erro && <p className="text-4xl font-extralight italic py-5">Erro ao carregar clima</p>}
 
       {weather && (
         <p className="text-4xl font-extralight italic py-5">
@@ -46,4 +61,5 @@ function Weather() {
     </div>
   );
 }
+
 export default Weather;

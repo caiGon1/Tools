@@ -17,7 +17,7 @@ function Weather() {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         const response = await fetch(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=42b1d3e62eff899da17a18acc26fc850`
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=KEY`
         );
         if (!response.ok) throw new Error("Erro na rede");
 

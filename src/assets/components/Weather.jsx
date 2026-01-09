@@ -35,7 +35,6 @@ function Weather() {
         );
 
         const data = await response.json();
-        console.log(API_KEY);
 
 
         setWeather(data.weather[0].main);
@@ -50,7 +49,7 @@ function Weather() {
   }, [coords]);
 
   return (
-    <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-0 md:ml-225 px-4 text-center md:text-right">
+    <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-12 md:ml-225 px-2 text-center md:text-right">
       {!weather && !erro && (
         <p className="text-4xl font-extralight italic py-5">Loading...</p>
       )}

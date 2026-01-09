@@ -48,7 +48,7 @@ const indiceAleatorio = Math.floor(Math.random() * listaMensagens.length);
 const saudacao = listaMensagens[indiceAleatorio];
 
   return (
-    <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-0 md:ml-24 px-4 text-center md:text-left">
+    <div className="mt-16 md:mt-45 md:mx-0  text-center md:text-left">
       <h1 className="text-6xl">{saudacao}, user</h1>
       <div className="max-w-xl w-full">
       {erro && <p className="text-4xl font-extralight italic py-5">Unable to retrieve phrase of the day. However, that is not your fault.</p>}

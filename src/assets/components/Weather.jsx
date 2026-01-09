@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function Weather() {
-  const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
   const [weather, setWeather] = useState(null);
   const [temp, setTemp] = useState(null);
   const [erro, setErro] = useState(false);
@@ -39,7 +39,6 @@ function Weather() {
 
         setWeather(data.weather[0].main);
         setTemp(Math.round(data.main.temp));
-        console.log(API_KEY);
       } catch (error) {
         console.error(error);
         setErro(true);

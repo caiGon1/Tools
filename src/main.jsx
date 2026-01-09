@@ -9,7 +9,7 @@ import Weather from "./assets/components/Weather.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Header />
-    <div className="flex">
+    <div className="flex justify-center md:gap-75 md:items-start flex-col md:flex-row">
       <Welcome />
       <Weather />
     </div>

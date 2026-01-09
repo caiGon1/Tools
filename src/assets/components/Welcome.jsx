@@ -53,7 +53,7 @@ const saudacao = listaMensagens[indiceAleatorio];
       <div className="max-w-xl w-full">
       {erro && <p className="text-4xl font-extralight italic py-5">Unable to retrieve phrase of the day. However, that is not your fault.</p>}
 
-      {!frase && !erro && <p className="text-4xl font-extralight italic py-5">Loading...</p>}
+      {!frase && !erro && <p className="text-4xl font-extralight italic py-5">Loading phrase of the day...</p>}
 
       
       {frase && <p className="text-4xl font-extralight italic py-5">{frase.q} - {frase.a}</p>}

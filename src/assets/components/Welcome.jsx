@@ -27,9 +27,9 @@ function Welcome() {
 
   // Lógica de mensagens de boas-vindas
   const mensagens = {
-    dia: ["Good morning", "Rise and shine"],
-    tarde: ["Good afternoon", "How are you"],
-    noite: ["Good evening", "Sweet dreams"],
+    dia: ["Good morning", "Rise and shine", "Time to work"],
+    tarde: ["Good afternoon", "How are you", "How may I help"],
+    noite: ["Good evening", "Sweet dreams", "Rest well"],
   };
 
   const periodo =

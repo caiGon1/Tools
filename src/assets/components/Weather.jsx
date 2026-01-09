@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function Weather() {
-  const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
+  const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
   const [weather, setWeather] = useState(null);
   const [temp, setTemp] = useState(null);
   const [erro, setErro] = useState(false);
@@ -39,6 +39,7 @@ function Weather() {
 
         setWeather(data.weather[0].main);
         setTemp(Math.round(data.main.temp));
+        console.log(API_KEY);
       } catch (error) {
         console.error(error);
         setErro(true);
@@ -49,7 +50,7 @@ function Weather() {
   }, [coords]);
 
   return (
-    <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-12 md:ml-225 px-2 text-center md:text-right">
+    <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-12 md:ml-60 px-2 text-center md:text-right">
       {!weather && !erro && (
         <p className="text-4xl font-extralight italic py-5">Loading...</p>
       )}

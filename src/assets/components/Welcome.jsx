@@ -41,13 +41,13 @@ function Welcome() {
   const saudacao = mensagens[periodo][0];
 
   return (
-    <div className="p-10">
-      <h1 className="text-4xl mb-4">{saudacao}, user</h1>
-      {erro && <p>Erro ao carregar a frase 😢</p>}
+    <div className="p-50">
+      <h1 className="text-6xl mb-4">{saudacao}, user</h1>
+      {erro && <p className="text-4xl w-120 font-extralight italic py-5">Unable to retrieve phrase of the day. However, that is not your fault.</p>}
 
-      {!frase && !erro && <p>Loading...</p>}
+      {!frase && !erro && <p className="text-4xl w-120 font-extralight italic py-5">Loading...</p>}
 
-      {frase && <p>{frase.q} - {frase.a}</p>}
+      {frase && <p className="text-4xl w-120 font-extralight italic py-5">{frase.q} - {frase.a}</p>}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Header from "./assets/components/Header.jsx";
 import Wip from "./assets/components/Wip.jsx";
 import Welcome from "./assets/components/Welcome.jsx";
 import Weather from "./assets/components/Weather.jsx";
+import TasksMng from "./assets/components/TasksMng.jsx";
 
 
 createRoot(document.getElementById("root")).render(
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")).render(
       <Welcome />
       <Weather />
     </div>
+    <TasksMng/>
     <Wip />
   </StrictMode>
 );

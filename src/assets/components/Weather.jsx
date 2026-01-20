@@ -52,6 +52,7 @@ function Weather() {
     <div className="mt-16 md:mt-45 max-w-xl mx-auto md:mx-12 md:ml-60 px-2 text-center md:text-right">
       {!weather && !erro && (
         <p className="text-4xl font-extralight italic py-5">Loading...</p>
+        
       )}
 
       {erro && <p className="text-4xl font-extralight italic py-5">Error on loading weather</p>}

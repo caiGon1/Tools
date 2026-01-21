@@ -1,10 +1,27 @@
 import { LucideCalendar, Trash, TrashIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function TasksMng() {
   const [task, setTask] = useState();
   const [description, setDescription] = useState();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks") || []),
+  );
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+    function onTaskClick(tasksId) {
+    const newTasks = tasks.map((tasks) => {
+      if (tasks.id === tasksId) {
+        return { ...tasks, isCompleted: !tasks.isCompleted };
+      } else {
+        return tasks;
+      }
+    });
+    setTasks(newTasks);
+  }
 
   function AddTaskSubmit(task, description) {
     const newTask = {
@@ -32,7 +49,7 @@ function TasksMng() {
   }
 
   return (
-    <div className="min-h-[100] w-120 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
+    <div className="min-h-[100px] w-120 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
       <h1 className="text-center text-xl text-justify-center my  h-fit rounded-xl ">
         Gerênciador de Tarefas
       </h1>
@@ -71,10 +88,10 @@ function TasksMng() {
               key={item.id}
               className="bg-white rounded-md p-3 mb-3 shadow flex justify-between"
             >
-              <div>
-                <h2 className="font-semibold text-lg">{item.task}</h2>
-                <p className="text-sm text-gray-700">{item.description}</p>
-              </div>
+              <button className={`hover:cursor-pointer ${item.isCompleted && "line-through"} `} onClick={()=>onTaskClick(item.id)}>
+                <h2 className={`font-semibold text-lg`}>{item.task}</h2>
+                <p className={`text-sm text-gray-700`}>{item.description}</p>
+              </button>
 
               <div className="flex ml-auto gap-3">
                 <button

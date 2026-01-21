@@ -1,3 +1,4 @@
+import { LucideCalendar, Trash, TrashIcon } from "lucide-react";
 import { useState } from "react";
 
 function TasksMng() {
@@ -14,13 +15,28 @@ function TasksMng() {
     };
     setTasks([...tasks, newTask]);
   }
+  function onTaskClick(tasksId) {
+    const newTasks = tasks.map((tasks) => {
+      if (tasks.id === tasksId) {
+        return { ...tasks, isCompleted: !tasks.isCompleted };
+      } else {
+        return tasks;
+      }
+    });
+    setTasks(newTasks);
+  }
+
+  function onTaskDelete(tasksId) {
+    const newTasks = tasks.filter((task) => task.id != tasksId);
+    setTasks(newTasks);
+  }
 
   return (
-    <div className="min-h-[100] w-150 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
-      <h1 className="text-center text-xl text-justify-center my italic h-fit rounded-xl font-extralight">
+    <div className="min-h-[100] w-120 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
+      <h1 className="text-center text-xl text-justify-center my  h-fit rounded-xl ">
         Gerênciador de Tarefas
       </h1>
-      <div className="flex flex-col gap-6 ml-2 mr-2">
+      <div className="flex flex-col gap-6 ml-2 mr-2 my-2">
         <input
           className="bg-white rounded-md px-3 py-2 mt-3 shadow"
           placeholder="Digite sua tarefa aqui"
@@ -48,12 +64,33 @@ function TasksMng() {
         >
           Adicionar
         </button>
-        <div className="mt-6">
-          {tasks.map((item) => (
-            <div key={item.id} className="bg-white rounded-md p-3 mb-3 shadow">
-              <h2 className="font-semibold text-lg">{item.task}</h2>
 
-              <p className="text-sm text-gray-700">{item.description}</p>
+        <div className="mt-6 ">
+          {tasks.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white rounded-md p-3 mb-3 shadow flex justify-between"
+            >
+              <div>
+                <h2 className="font-semibold text-lg">{item.task}</h2>
+                <p className="text-sm text-gray-700">{item.description}</p>
+              </div>
+
+              <div className="flex ml-auto gap-3">
+                <button
+                  title="Adicionar ao calendário"
+                  className="text-gray-500 hover:cursor-pointer"
+                >
+                  <LucideCalendar />
+                </button>
+                <button
+                  onClick={() => onTaskDelete(item.id)}
+                  title="Remover tarefa"
+                  className="text-gray-500 hover:cursor-pointer"
+                >
+                  <Trash />
+                </button>
+              </div>
             </div>
           ))}
         </div>

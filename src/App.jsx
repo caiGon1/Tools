@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from "react"; 
 import Header from "./assets/components/Header.jsx";
-import Wip from "./assets/components/Wip.jsx";
 import Welcome from "./assets/components/Welcome.jsx";
 import Weather from "./assets/components/Weather.jsx";
 import TasksMng from "./assets/components/TasksMng.jsx";
@@ -41,7 +40,6 @@ function App() {
         <TasksMng onCalendarClick={handleAddEvent} />
         <Calendario events={events} setEvents={setEvents} />
       </div>
-      <Wip />
     </>
   );
 }

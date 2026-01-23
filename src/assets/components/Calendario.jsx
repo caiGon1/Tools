@@ -1,40 +1,37 @@
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import React, { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
+import { Calendar, momentLocalizer, Views } from "react-big-calendar";
+import moment from "moment";
+import "moment/locale/pt-br";
+moment.locale("pt-br");
+import { useState } from "react";
 
-function Calendario() { 
-    
-const localizer = momentLocalizer(moment);
-const [events, setEvents] = useState([
-    {
-      title: 'Tarefa 1',
-      start: new Date(2026, 0, 21, 10, 0), // 21 Jan 2026, 10:00
-      end: new Date(2026, 0, 21, 11, 0),
-      desc: 'Descrição da tarefa 1'
-    },
-    {
-      title: 'Tarefa 2',
-      start: new Date(2026, 0, 22, 12, 0),
-      end: new Date(2026, 0, 22, 13, 30),
-      desc: 'Descrição da tarefa 2'
-    }
-  ]);
+function Calendario({ events }) {
+  const localizer = momentLocalizer(moment);
 
-  return (
-      <div style={{ height: 600, padding: 20 }}>
+ return (
+    <div style={{ height: '500px', padding: '20px', width: '75%', margin: '0 auto' }}>
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: '100%', width: '80%', justifySelf: 'center', boxShadow:' 0 5px 30px -12px black'}}
-        tooltipAccessor={event => event.desc}
+        // Define explicitamente as abas disponíveis
+        views={['month', 'agenda']} 
+        // Define a visão inicial sem travar o componente
+        defaultView={Views.MONTH}
+        // Garante que o clique nos botões funcione
+        onView={(view) => console.log("Mudou para: ", view)}
+        messages={{
+          month: 'Mês',
+          agenda: 'Agenda',
+          today: 'Hoje',
+          previous: 'Anterior',
+          next: 'Próximo',
+        }}
       />
     </div>
-    );  
+  );
 }
-
 
 export default Calendario;

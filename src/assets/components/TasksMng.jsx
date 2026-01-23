@@ -1,24 +1,24 @@
 import { LucideCalendar, Trash, TrashIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-function TasksMng() {
+function TasksMng({onCalendarClick}) {
   const [task, setTask] = useState();
   const [description, setDescription] = useState();
   const [tasks, setTasks] = useState(() => {
-  const stored = localStorage.getItem("tasks");
-  return stored ? JSON.parse(stored) : [];
-});
+    const stored = localStorage.getItem("tasks");
+    return stored ? JSON.parse(stored) : [];
+  });
 
- useEffect(() => {
-  const storedTasks = localStorage.getItem("tasks");
-  if (storedTasks) {
-    setTasks(JSON.parse(storedTasks));
-  }
- }, []);
-  
   useEffect(() => {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}, [tasks]);
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function AddTaskSubmit(task, description) {
     const newTask = {
@@ -29,6 +29,7 @@ function TasksMng() {
     };
     setTasks([...tasks, newTask]);
   }
+  
   function onTaskClick(tasksId) {
     const newTasks = tasks.map((tasks) => {
       if (tasks.id === tasksId) {
@@ -44,6 +45,22 @@ function TasksMng() {
     const newTasks = tasks.filter((task) => task.id != tasksId);
     setTasks(newTasks);
   }
+
+    function handleCalendarClick(taskId) {
+      const taskFound = tasks.find((task) => task.id === taskId);
+  
+      if (!taskFound) return;
+  
+      const calendarEvent = {
+        title: taskFound.task,
+        start: new Date(),
+        end: new Date(),
+        desc: taskFound.description,
+      };
+  
+      onCalendarClick(calendarEvent);
+    }
+  
 
   return (
     <div className="min-h-25 w-120 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
@@ -96,6 +113,7 @@ function TasksMng() {
               <div className="flex ml-auto gap-3">
                 <button
                   title="Adicionar ao calendário"
+                  onClick={() => handleCalendarClick(item.id)}
                   className="text-gray-500 hover:cursor-pointer"
                 >
                   <LucideCalendar />

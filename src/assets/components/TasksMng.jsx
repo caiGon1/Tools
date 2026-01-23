@@ -1,4 +1,4 @@
-import { LucideCalendar, Trash, TrashIcon } from "lucide-react";
+import { LucideCalendar, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function TasksMng({onCalendarClick}) {

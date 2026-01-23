@@ -8,14 +8,12 @@ function Welcome() {
   useEffect(() => {
     async function buscarFrase() {
       try {
-        // Usando um proxy gratuito para contornar o bloqueio de CORS
         const response = await fetch(
           "https://api.allorigins.win/raw?url=https://zenquotes.io/api/today"
         );
         if (!response.ok) throw new Error("Erro na rede");
 
         const data = await response.json();
-        // A API retorna um array [ {q: "...", a: "..."} ]
         setFrase(data[0]);
       } catch (error) {
         console.error("Erro ao buscar frase:", error);
@@ -25,7 +23,6 @@ function Welcome() {
     buscarFrase();
   }, []);
 
-  // Lógica de mensagens de boas-vindas
   const mensagens = {
     dia: ["Good morning", "Rise and shine", "Time to work"],
     tarde: ["Good afternoon", "How are you", "How may I help"],
@@ -40,11 +37,7 @@ function Welcome() {
         : "noite";
   
 const listaMensagens = mensagens[periodo];
-
-// gera um índice aleatório
 const indiceAleatorio = Math.floor(Math.random() * listaMensagens.length);
-
-// escolhe a saudação aleatória
 const saudacao = listaMensagens[indiceAleatorio];
 
   return (

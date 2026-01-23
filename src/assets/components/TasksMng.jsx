@@ -63,7 +63,7 @@ function TasksMng({onCalendarClick}) {
   
 
   return (
-    <div className="min-h-25 w-120 my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
+    <div className="w-[90%] md:w-1/2 lg:max-w-xl my-50  bg-pink-300 rounded-md flex-col justify-self-center justify-center shadow-2xl">
       <h1 className="text-center text-xl text-justify-center my  h-fit rounded-xl ">
         Gerênciador de Tarefas
       </h1>
